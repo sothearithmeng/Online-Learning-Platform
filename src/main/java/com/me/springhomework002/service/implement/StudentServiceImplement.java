@@ -48,7 +48,7 @@ public class StudentServiceImplement implements StudentService {
             studentCourseRepository.insertStudentIdAndCourseId(student.getStudentId(), courseId);
         }
 
-        return student;
+        return studentRepository.getStudentById(student.getStudentId());
     }
 
     @Override
