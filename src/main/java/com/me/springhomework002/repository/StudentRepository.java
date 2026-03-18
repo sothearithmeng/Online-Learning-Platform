@@ -15,7 +15,7 @@ public interface StudentRepository {
                     @Result(property = "studentId", column = "student_id"),
                     @Result(property = "studentName", column = "student_name"),
                     @Result(property = "phoneNumber", column = "phone_number"),
-                    @Result(property = "courses", column = "student_id", one = @One(
+                    @Result(property = "courses", column = "student_id", many = @Many(
                             select = "com.me.springhomework002.repository.StudentCourseRepository.getAllCoursesByStudentId"
                     ) )
     }
@@ -27,11 +27,11 @@ public interface StudentRepository {
     """)
     List<Student> getAllStudents(int offset, Integer size);
 
-    @ResultMap("studentMapper")
+//    @ResultMap("studentMapper")
     @Select("""
-        INSERT INTO students VALUES (default, #{studentName}, #{email}, #{phoneNumber}) RETURNING *
+        INSERT INTO students VALUES (default, #{studentName}, #{email}, #{phoneNumber}) RETURNING student_id
     """)
-    Student saveStudent(StudentRequest request);
+    Long saveStudent(StudentRequest request);
 
     @ResultMap("studentMapper")
     @Select("""

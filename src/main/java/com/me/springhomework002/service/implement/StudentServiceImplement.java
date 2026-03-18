@@ -43,12 +43,15 @@ public class StudentServiceImplement implements StudentService {
             courseService.getCourseById(id);
         }
 
-        Student student = studentRepository.saveStudent(request);
+//        Student student = studentRepository.saveStudent(request);
+        Long studentId = studentRepository.saveStudent(request);
         for (Long courseId : request.courseId()) {
-            studentCourseRepository.insertStudentIdAndCourseId(student.getStudentId(), courseId);
+            studentCourseRepository.insertStudentIdAndCourseId(studentId, courseId);
         }
 
-        return studentRepository.getStudentById(student.getStudentId());
+//        studentRepository.getStudentById(student.getStudentId());
+
+        return studentRepository.getStudentById(studentId);
     }
 
     @Override
